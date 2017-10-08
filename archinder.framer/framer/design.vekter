@@ -2964,7 +2964,7 @@
             "invert" : 0,
             "__class" : "RectangleNode",
             "clip" : false,
-            "visible" : true,
+            "visible" : false,
             "fillType" : "color",
             "invertEnabled" : 0,
             "heightFactor" : null,
