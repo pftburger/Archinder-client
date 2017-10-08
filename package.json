@@ -1,0 +1,22 @@
+{
+  "name": "Archinder",
+  "description": "A swiping evaluator for architectural experiments. The swipe-left/swipe-right for yes/no input. As seen in apps like Jelly and Tinder.",
+  "version": "0.1.0",
+  "dependencies": {
+    "cookies": "^0.7.1",
+    "express": "^4.15.5",
+    "express-http-auth": "^0.1.0",
+    "firebase": "^4.4.0",
+    "websocket": "^1.0.24"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pftburger/Archinder.git"
+  },
+  "keywords": [],
+  "author": {
+    "name": "Theron Burger",
+    "email": "burger@aida.uni-hannover.de"
+  },
+  "scripts": {}
+}

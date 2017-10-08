@@ -1,0 +1,81 @@
+{
+  "users": {
+    "default": {
+      "name": "",
+      "photoURL": "",
+      "location": "",
+      "tracks": [
+        "triangles1"
+      ]
+    }
+  },
+  "swipes": {
+    "default": ""
+  },
+  "cards": {
+    "default": {
+      "name": "name",
+      "discription": "",
+      "imagePath": "",
+      "type": "",
+      "properties": {
+        "genes": ""
+      }
+    },
+    "0e6l212hh4": {
+      "name": "Triangle 1",
+      "discription": "",
+      "imagePath": "gs://archinder-a01.appspot.com/triangles/triangle1.jpg",
+      "type": "",
+      "properties": {
+        "genes": ""
+      }
+    },
+    "vtw8zryyn9": {
+      "name": "Triangle 2",
+      "discription": "",
+      "imagePath": "gs://archinder-a01.appspot.com/triangles/triangle2.jpg",
+      "type": "",
+      "properties": {
+        "genes": ""
+      }
+    },
+    "9dqtskhhcl": {
+      "name": "Triangle 3",
+      "discription": "",
+      "imagePath": "gs://archinder-a01.appspot.com/triangles/triangle3.jpg",
+      "type": "",
+      "properties": {
+        "genes": ""
+      }
+    },
+    "x3hfji90ji": {
+      "name": "Triangle 4",
+      "discription": "",
+      "imagePath": "gs://archinder-a01.appspot.com/triangles/triangle4.jpg",
+      "type": "",
+      "properties": {
+        "genes": ""
+      }
+    }
+  ,
+    "5hf3j3k5j7": {
+      "name": "Triangle 5",
+      "discription": "",
+      "imagePath": "gs://archinder-a01.appspot.com/triangles/triangle5.jpg",
+      "type": "",
+      "properties": {
+        "genes": ""
+      }
+    }
+  },
+  "tracks": {
+    "triangles1": [
+      "0e6l212hh4",
+      "vtw8zryyn9",
+      "9dqtskhhcl",
+      "x3hfji90ji",
+      "5hf3j3k5j7"
+    ]
+  }
+}
