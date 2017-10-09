@@ -76,6 +76,22 @@ populateCards = ( tracksUser ) ->
 						newCard = card.copy();
 						cards[id] = newCard;
 						cards[id].data = data.val();
+						cards[id].animate
+							options:
+								time: 0.3
+								curve: Bezier.ease #Swiping Screen : Cards
+						cards[id].states.visible =
+							opacity: 1.00
+						cards[id].states.like =
+							x: 440
+							y: 200
+							rotation:40
+							opacity: 1.00
+						cards[id].states.dislike =
+							x: -440
+							y: 200
+							rotation:-40
+							opacity: 1.00
 						screenSwiping.addChild(cards[id])
 						imageRef = storage.ref(data.val().imagePath);
 						imageRef.getDownloadURL().then( (url) ->
@@ -282,9 +298,11 @@ manageCards = () ->
 	keys = Object.keys(cards)
 	if keys.length > 0
 		cardAddTimerStop()
+		cards[keys[0]].opacity = 0;
 		cards[keys[0]].visible = true;
-		btnDislike.visible = true;
-		btnLike.visible = true;
+		cards[keys[0]].animate("visible")
+		btnLike.animate("a")
+		btnDislike.animate("a")
 		if keys.length > 1
 			cards[keys[1]].placeBehind(cards[keys[0]])
 			cards[keys[1]].rotation = randomRotation()
@@ -316,23 +334,57 @@ logResult = (cardID, choice) ->
 		}
 	database.ref("swipes/"+uid+"/" + randomString(15) ).set(data)
 
+
+
+	
+btnLike.animate
+	options:
+		time: 0.3
+		curve: Bezier.ease #Swiping Screen : Cards
+btnDislike.animate
+	options:
+		time: 0.3
+		curve: Bezier.ease #Swiping Screen : Cards
+		
+btnDislike.states.a =
+	opacity: 1.00
+btnDislike.states.b =
+	opacity: 0
+	
+btnLike.animate
+	options:
+		time: 0.3
+		curve: Bezier.ease #Swiping Screen : Cards
+		
+btnLike.states.a =
+	opacity: 1.00
+btnLike.states.b =
+	opacity: 0
+	
+
 doSwipe  = (choice) ->
 	keys = Object.keys(cards)
-	cards[keys[0]].visible = false;
+	cards[keys[0]].animate(choice)
+	#cards[keys[0]].visible = false;
 	logResult(cards[keys[0]].data.id, choice)
 	if keys.length == 1
-		btnDislike.visible = false;
-		btnLike.visible = false;
+		btnLike.animate("b")
+		btnDislike.animate("b")
+		#btnDislike.visible = false;
+		#btnLike.visible = false;
 	if keys.length == 2
 		#print "Showing last card " + cards[keys[1]].data.id
 		cards[keys[1]].rotation = randomRotation()
+		cards[keys[1]].opacity = 0;
+		cards[keys[1]].animate("visible")
 		cards[keys[1]].visible = true;
 	if keys.length > 2
 		#print "Showing card " + cards[keys[2]].data.id
 		cards[keys[2]].placeBehind( cards[keys[1]] )
 		cards[keys[2]].rotation = randomRotation()
+		cards[keys[2]].opacity = 0;
+		cards[keys[2]].animate("visible")
 		cards[keys[2]].visible = true;
-		
 	delete cards[keys[0]]
 
 
