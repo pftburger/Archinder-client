@@ -95,12 +95,9 @@ populateCards = ( tracksUser ) ->
 						screenSwiping.addChild(cards[id])
 						imageRef = storage.ref(data.val().imagePath);
 						imageRef.getDownloadURL().then( (url) ->
-              console.log("In image fetching code")
-              console.log("url : " + url)
 							start = url.indexOf("%2F") + 3
 							end = url.indexOf(".jpg")
 							id =  url.substring(start,end)
-              console.log("id : " + id)
 							cards[id].data.imageUrl = url
 							cards[id].children[0].image = url
 							)
