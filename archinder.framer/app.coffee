@@ -16,7 +16,7 @@ config = {
   storageBucket: "archinder-a01.appspot.com",
 };
 
-try 
+try
 	firebase.initializeApp(config);database = firebase.database();
 	storage = firebase.storage();
 	provider = new firebase.auth.FacebookAuthProvider();
@@ -34,7 +34,7 @@ uid = null;
 getRandomInt = (min, max) ->
   min = Math.ceil(min);
   max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min)) + min; 
+  return Math.floor(Math.random() * (max - min)) + min;
 
 randomString = (len) ->
 	text = " ";
@@ -60,7 +60,7 @@ populateTrackList = ( data ) ->
 		cell = layer.copy()
 		if data[index].active
 			cell.children[1].backgroundColor = "#66BB66"
-		else 
+		else
 			cell.children[1].backgroundColor = "#EE4444"
 		TemplateScrollComponent.applyTemplate cell, data[ index ], dataFormatter
 		return cell
@@ -95,9 +95,12 @@ populateCards = ( tracksUser ) ->
 						screenSwiping.addChild(cards[id])
 						imageRef = storage.ref(data.val().imagePath);
 						imageRef.getDownloadURL().then( (url) ->
+              console.log("In image fetching code")
+              console.log("url : " + url)
 							start = url.indexOf("%2F") + 3
 							end = url.indexOf(".jpg")
 							id =  url.substring(start,end)
+              console.log("id : " + id)
 							cards[id].data.imageUrl = url
 							cards[id].children[0].image = url
 							)
@@ -105,7 +108,7 @@ populateCards = ( tracksUser ) ->
 				)
 #Firebase : User Init, User Login, DB Init
 firebase.auth().onAuthStateChanged( (user) ->
-	if user 
+	if user
 		#User is signed in.
 		displayName = user.displayName;
 		email = user.email;
@@ -123,7 +126,7 @@ firebase.auth().onAuthStateChanged( (user) ->
 		#attach a listener for the tracks (This is async!)
 		database.ref("users/"+uid+"/tracks").once("value").then( (data) ->
 			if !data.val()
-				database.ref("users/default/tracks").once("value").then( (data) -> 
+				database.ref("users/default/tracks").once("value").then( (data) ->
 					tracksUser = data.val()
 					firebase.database().ref("users/"+uid+"/tracks").set({ "value":tracksUser})
 					populateTrackList(tracksUser)
@@ -180,20 +183,20 @@ btnWelcomeLoginFacebook.onTap (event, layer) ->
 	btnWelcomeLoginFacebookText.text = "...loading..."
 	btnWelcomeLoginEmail.visible = false;
 	firebase.auth().signInWithRedirect(provider);
-	
+
 
 inputEmail = new InputModule.Input
-	virtualKeyboard: false 
-	placeholder: "email" 
+	virtualKeyboard: false
+	placeholder: "email"
 	placeholderColor: "#CFCFD3"
 	textColor: "#8E8E93"
 	fontSize: 14
 	width: 300
 	height: 20
 inputPassword = new InputModule.Input
-	virtualKeyboard: false 
+	virtualKeyboard: false
 	type: "password"
-	placeholder: "password" 
+	placeholder: "password"
 	placeholderColor: "#CFCFD3"
 	textColor: "#8E8E93"
 	fontSize: 14
@@ -227,12 +230,12 @@ logout.states.a =
 	x: -120
 logout.states.b =
 	x: 20
-	
+
 logout.animate
 	options:
 		time: 0.3
 		curve: Bezier.ease
-	
+
 btnLogoutConfirm.animate
 	options:
 		time: 0.3
@@ -264,7 +267,7 @@ radarPulseTimer = null
 radarPulseTime = 3;
 radarPulseAnimation = new Animation
 	layer: radarPulse
-	properties: 
+	properties:
 		scale: 6
 		blur: 100
 	curve: "linear"
@@ -291,7 +294,7 @@ btnSettings.onTap (event, layer) ->
 randomRotation = () ->
 	if getRandomInt(-11,10) > 0
 		return getRandomInt(2,4)
-	else 
+	else
 		return getRandomInt(-4,-2)
 
 manageCards = () ->
@@ -336,7 +339,7 @@ logResult = (cardID, choice) ->
 
 
 
-	
+
 btnLike.animate
 	options:
 		time: 0.3
@@ -345,22 +348,22 @@ btnDislike.animate
 	options:
 		time: 0.3
 		curve: Bezier.ease #Swiping Screen : Cards
-		
+
 btnDislike.states.a =
 	opacity: 1.00
 btnDislike.states.b =
 	opacity: 0
-	
+
 btnLike.animate
 	options:
 		time: 0.3
 		curve: Bezier.ease #Swiping Screen : Cards
-		
+
 btnLike.states.a =
 	opacity: 1.00
 btnLike.states.b =
 	opacity: 0
-	
+
 
 doSwipe  = (choice) ->
 	keys = Object.keys(cards)
@@ -396,4 +399,3 @@ btnDislike.onTap (event, layer) ->
 btnSettings.onTap (event, layer) ->
 	#print "To settings"
 	flow.showPrevious(screenSettings)
-
